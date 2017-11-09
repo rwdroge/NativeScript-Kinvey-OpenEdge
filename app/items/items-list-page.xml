@@ -1,0 +1,78 @@
+<Page class="page" navigatingTo="onNavigatingTo"
+    xmlns:lv="nativescript-pro-ui/listview"
+    xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:PullRefresh="nativescript-pulltorefresh"
+      loaded="pageLoaded">
+
+    <ActionBar class="action-bar">
+        <!-- Should remove the navigation button -->
+        <NavigationButton ios:visibility="collapsed" />
+        <Label class="action-bar-title" text="Items" horizontalAlignment="center" />
+    </ActionBar>
+
+    <GridLayout class="page-content">
+        <!--
+        RadListView is a UI component part of the Progress NativeScript UI set of components.
+        Learn more about the RadListView UI component and how it can be customized in this documentation article:
+        http://docs.telerik.com/devtools/nativescript-ui/Controls/NativeScript/ListView/getting-started
+        This component is used to display the master list in the master-detail structure.
+        -->
+        <PullRefresh:PullToRefresh refresh="refreshList">
+        <lv:RadListView items="{{ items }}" itemTap="onItemItemTap" class="list-group">
+            <lv:RadListView.listViewLayout>
+                <lv:ListViewLinearLayout scrollDirection="Vertical" />
+            </lv:RadListView.listViewLayout>
+
+            <lv:RadListView.itemTemplate>
+                <StackLayout class="list-group-item">
+
+                    <GridLayout rows="*, *, *" columns="*, *" class="list-group-item-content">
+                        <Label text="{{ name }}" class="text-primary font-weight-bold" />
+                        <Label col="1" horizontalAlignment="right" class="list-group-item-text m-r-5">
+                            <FormattedString>
+                                <Span text="€" />
+                                <Span text="{{ price }}" />
+                                <!-- <Span text="/day" /> -->
+                            </FormattedString>
+                        </Label>
+
+                        <StackLayout row="1" class="hr-light m-t-5 m-b-5" colSpan="2" />
+
+                        <Image row="2" src="" stretch="aspectFill" height="120" class="m-r-20" decodeHeight="120" />
+
+                        <StackLayout row="2" col="1" verticalAlignment="center" class="list-group-item-text">
+                            <Label class="p-b-10">
+                                <FormattedString ios:fontFamily="system">
+                                    <Span text="&#xf02b;   " class="fa text-primary" />
+                                    <Span text="{{ maincategory }}" />
+                                </FormattedString>
+                            </Label>
+                            <Label>    
+                                <FormattedString ios:fontFamily="system">
+                                    <Span text="&#xf02c;   " class="fa text-primary" />
+                                    <Span text="{{ category }}" />
+                                </FormattedString>
+                            </Label>
+                            <Label class="p-b-10">
+                                <FormattedString ios:fontFamily="system">
+                                    <Span text="&#xf19c;   " class="fa text-primary" />
+                                    <Span text="{{ onhand }}" />
+                                    <!-- <Span text=" On hand" /> -->
+                                </FormattedString>
+                            </Label>
+                            <Label class="p-b-10">
+                                <FormattedString ios:fontFamily="system">
+                                    <Span text="&#xf24e;   " class="fa text-primary" />
+                                    <Span text="{{ weight }}" />
+                                    <Span text=" kg" />
+                                </FormattedString>
+                            </Label>
+                        </StackLayout>
+                    </GridLayout>
+
+                </StackLayout>
+            </lv:RadListView.itemTemplate>
+        </lv:RadListView>
+        </PullRefresh:PullToRefresh> 
+        <ActivityIndicator busy="{{ isLoading }}" />
+    </GridLayout>
+</Page>

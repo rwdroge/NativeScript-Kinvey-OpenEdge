@@ -1,0 +1,99 @@
+<Page class="page"
+    navigatingTo="onNavigatingTo"
+    xmlns="http://schemas.nativescript.org/tns.xsd">
+
+    <ActionBar class="action-bar">
+        <!--HACK - we should remove the navigation button-->
+        <NavigationButton visibility="collapsed" />
+        <Label class="action-bar-title" text="Edit Item Details" horizontalAlignment="center" />
+        <ActionItem tap="onCancelButtonTap" ios.position="left" android.position="left">
+            <Label text="Cancel" verticalAlignment="center" class="action-item" />
+        </ActionItem>
+        <ActionItem ios.position="right" android.position="right">
+            <Label text="Done" class="action-item" verticalAlignment="center" tap="onDoneButtonTap" 
+                isEnabled="{{ item.isModelValid }}"
+                isUserInteractionEnabled="{{ item.isModelValid }}" />
+        </ActionItem>
+    </ActionBar>
+
+    <GridLayout class="page-content">
+        <ScrollView>
+            <StackLayout class="item-list">
+                <Label text="CAR MAKE" class="item-list-odd" />
+                <TextField text="{{ item.name }}" hint="Item make field is required" 
+                    class="{{ item.name, item.name ? 'item-list-even' : 'item-list-even invalid-text' }}" />
+
+                <GridLayout rows="*, 55, *" columns="*, auto" class="item-list-odd" >
+                    <Label text="PRICE PER DAY" />
+                    <Label col="1" horizontalAlignment="right" class="text-primary item-list-price">
+                        <FormattedString>
+                            <Span text="€" />
+                            <Span text="{{ item.price }}" />
+                        </FormattedString>
+                    </Label>
+
+                    <StackLayout row="1" colSpan="2" verticalAlignment="center">
+                        <Slider value="{{ item.price, item.price | roundingValueConverter }}" />
+                    </StackLayout>
+
+                    <Label text="ADD OR REMOVE IMAGE" row="2" colSpan="2" />
+                </GridLayout>
+                
+                <StackLayout class="item-list-even">
+                    <GridLayout height="80" width="80" class="thumb" horizontalAlignment="left" 
+                        backgroundImage="{{ item.imageUrl }}" tap="onImageAddRemoveTap">
+                        <GridLayout class="thumb-add" 
+                            visibility="{{ item.imageUrl, item.imageUrl | visibilityValueConverter }}">
+                            <Label text="&#xf030;" class="fa" horizontalAlignment="center" verticalAlignment="center" />
+                        </GridLayout>
+                        <GridLayout class="thumb-remove" 
+                            visibility="{{ item.imageUrl, !item.imageUrl | visibilityValueConverter }}">
+                            <Label text="&#xf014;" class="fa" horizontalAlignment="center" verticalAlignment="center" />
+                        </GridLayout>
+                    </GridLayout>
+                    <Label visibility="{{ item.imageUrl, item.imageUrl | visibilityValueConverter }}" 
+                        class="invalid-image" text="Image field is required" />
+                </StackLayout>
+
+                <Label text="CLASS" class="item-list-odd" />
+                <GridLayout columns="*, auto" tap="onSelectorTap" tag="class" class="item-list-even">
+                    <Label text="{{ item.class }}" />
+                    <Label text="&#xf054;" class="fa text-secondary" col="1" horizontalAlignment="center" verticalAlignment="center" />
+                </GridLayout>
+
+                <Label text="DOORS" class="item-list-odd" />
+                <GridLayout columns="*, auto" tap="onSelectorTap" tag="doors" class="item-list-even">
+                    <Label text="{{ item.doors }}" />
+                    <Label text="&#xf054;" class="fa text-secondary" col="1" horizontalAlignment="center" verticalAlignment="center" />
+                </GridLayout>
+
+                <Label text="SEATS" class="item-list-odd" />
+                <GridLayout columns="*, auto" tap="onSelectorTap" tag="seats" class="item-list-even">
+                    <Label text="{{ item.seats }}" />
+                    <Label text="&#xf054;" class="fa text-secondary" col="1" horizontalAlignment="center" verticalAlignment="center" />
+                </GridLayout>
+
+                <Label text="TRANSMISSION" class="item-list-odd" />
+                <GridLayout columns="*, auto" tap="onSelectorTap" tag="transmission" class="item-list-even">
+                    <Label text="{{ item.transmission }}" />
+                    <Label text="&#xf054;" class="fa text-secondary" col="1" horizontalAlignment="center" verticalAlignment="center" />
+                </GridLayout>
+                
+                <GridLayout rows="*, 55" columns="*, auto" class="item-list-odd">
+                    <Label text="LUGGAGE" />
+                    <Label col="1" horizontalAlignment="right" class="text-primary">
+                        <FormattedString>
+                            <Span text="{{ item.luggage }}" />
+                            <Span text=" Bag(s)" />
+                        </FormattedString>
+                    </Label>
+
+                    <Slider row="1" colSpan="2" minValue="0" maxValue="5" value="{{ item.luggage, item.luggage | roundingValueConverter }}" />
+                </GridLayout>
+
+            </StackLayout>
+        </ScrollView>
+
+        <ActivityIndicator busy="{{ isUpdating }}" />
+    </GridLayout>
+</Page>

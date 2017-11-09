@@ -1,0 +1,8 @@
+lib/
+node_modules/
+platforms/
+hooks/
+.vscode
+npm-debug.log
+*.js
+*.map
