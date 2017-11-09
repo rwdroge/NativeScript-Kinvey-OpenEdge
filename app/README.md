@@ -1,47 +1,10 @@
-# Known Issues:
-- To use this template with iOS Simulator you need to manually enable `Keychain Sharing` in the target settings’ Capabilities tab in XCode
-
-# NativeScript Core Master-Detail App Template
-App templates help you jump start your native cross-platform apps with built-in UI elements and best practices. Save time writing boilerplate code over and over again when you create new apps.
-
-This Master-Detail template is a fundamental building block for any app that displays collection of objects and their details and need to work both in online and offline mode while utilizing Kinvey as a backend.
-
-<img src="/tools/assets/phone-masterDetail-ios.png" height="400" /><img src="/tools/assets/phone-masterDetail-detail-ios.png" height="400" />
-
 ## Key Features
-- Editable master-detail interface
-- Integration with Kinvey database
-- Works offline
-- Customizable theme
-- UX and development best practices
-- Easy to understand code through extensive code comments
-
-## Quick Start
-Execute the following command to create an app from this template:
-
-```
-tns create my-app-name --template https://github.com/NativeScript/template-master-detail-kinvey
-```
-
-## Walkthrough
-
-### Architecture
-The template has the following pages:
-- `/cars/cars-list-page.js` - the master list page. It gets the data and displays it in a list. On item tap, it navigates to the item details page.
-- `/cars/car-detail-page/car-detail-page.js` - the item details page. Displays the details of the tapped item. Has an `Edit` button that leads to the edit page.
-- `/cars/car-detail-edit-page/car-detail-edit-page.js` - the item details edit page. Provides edit options for the selected item. The `Done` button saves the changes.
-
-There is one model to represent the data items:
-- `/cars/shared/car-model.js`
-
-The template also provides a data service:
-- `/cars/shared/car-service.js` - serves as a data layer for the master-detail data items. Wraps the functions that are used to make operations on the Kinvey database.
+- Uses Kinvey offline SDK
+- Kinvey as API Management for OE REST Services (RapidRest)
+- Read-only (GET) for now
 
 ### Kinvey integration
 The templates uses the [{N} Kinvey plugin](https://github.com/Kinvey/nativescript-sdk). The initialization is done before the app starts in the `/app.js` file. The initialization script is located at `/shared/kinvey.common.js`.
-
-### [Optional] Kinvey database setup
-By design the app is connected to a read-only copy of the sample data in Kinvey. If you want to see the "edit" functionality in action you will have to clone the sample data and update the app configuration to point to your own Kinvey setup. You can find detailed instructions how to achieve that [here](https://github.com/NativeScript/template-master-detail-kinvey/blob/master/tools/kinvey/kinvey-database-setup.md).
 
 ### Styling
 This template is set up to use SASS for styling. All classes used are based on the {N} core theme – consult the [documentation](https://docs.nativescript.org/angular/ui/theme.html#theme) to understand how to customize it. Check it out to see what classes you can use on which component.
@@ -64,8 +27,3 @@ Try [joining the NativeScript community Slack](http://developer.telerik.com/wp-l
 
 If you have found an issue with this template, please report the problem in the   [Issues](https://github.com/NativeScript/template-master-detail-kinvey/issues).
 
-## Contributing
-
-We love PRs, and accept them gladly. Feel free to propose changes and new ideas. We will review and discuss, so that they can be accepted and better integrated.
-
-**NB:** Please, have in mind that the master branch may refer to dependencies that are not on NPM yet!
