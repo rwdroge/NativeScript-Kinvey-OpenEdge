@@ -1,4 +1,6 @@
 {
+  "name": "nativekinveyoe",
+  "version": "1.0.0",
   "description": "NativeScript App using Kinvey as API management for OpenEdge REST services",
   "license": "SEE LICENSE IN <your-license-filename>",
   "readme": "NativeScript App using Kinvey as API management for OpenEdge REST services (offline support)",

@@ -4,5 +4,4 @@ platforms/
 hooks/
 .vscode
 npm-debug.log
-*.js
 *.map
